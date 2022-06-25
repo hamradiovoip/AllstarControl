@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">KD3SU Allstar Controller 0.1</string>
+    <string name="menu_settings"> Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="pref_user_name">Set username</string>
+    <string name="pref_user_name_summary">Set your username</string>
+
+    <string name="pref_user_profile">Remote Node Settings</string>
+
+    <string name="pref_update_setting">Update Settings</string>
+
+    <string name="pref_ip_name"> IP Address</string>
+    <string name="pref_ip_name_summary">Set Allstar node IP address</string>
+
+    <string name="pref_node_port">Your Allstar ssh Node port</string>
+    <string name="pref_node_port_summary">Set Allstar ssh Port Number</string>
+
+    <string name="pref_node_password">Set Allstar node ssh password</string>
+    <string name="pref_node_password_summary">Set Allstar node password</string>
+
+    <string name="pref_node_number">Set Allstar Node Number</string>
+    <string name="pref_node_number_summary">Set Allstar Node Number</string>
+
+
+</resources>

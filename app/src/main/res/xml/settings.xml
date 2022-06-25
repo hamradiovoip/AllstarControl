@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/pref_user_profile" >
+
+        <EditTextPreference
+            android:title="@string/pref_user_name"
+            android:summary="@string/pref_user_name_summary"
+            android:defaultValue="root"
+            android:key="prefUsername"/>
+        <EditTextPreference
+            android:title="@string/pref_node_password"
+            android:summary="@string/pref_node_password_summary"
+            android:key="prefNodePassword"/>
+        <EditTextPreference
+            android:title="@string/pref_ip_name"
+            android:summary="@string/pref_ip_name_summary"
+            android:key="prefIp"/>
+        <EditTextPreference
+            android:title="@string/pref_node_port"
+            android:key="prefPort"/>
+        <EditTextPreference
+            android:title="@string/pref_node_number"
+            android:summary="@string/pref_node_number_summary"
+            android:key="prefNode"/>
+
+    </PreferenceCategory>
+</PreferenceScreen>
