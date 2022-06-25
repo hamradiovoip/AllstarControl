@@ -20,30 +20,38 @@ import android.os.Handler;
 import com.google.android.material.tabs.TabLayout;
 
 
-
-
-/*                    <Button
-                        style="?android:attr/buttonStyleSmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Disconnect All"
-                        android:id="@+id/button3" />
-                    <Button
-                        style="?android:attr/buttonStyleSmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Node Status"
-                        android:id="@+id/button4" />*/
-
-
+/**
+ * This is a simple app for connecting to an Allstar node and executing commands via ssh, like
+ * connect, disconnect, show connections etc
+ * Needs work.
+ *     Instead of using ssh, a service that runs on the node would be another way
+ *     to communicate. Would have more control and better encryption.
+ *
+ *     Also:
+ *     Add junit tests
+ *     Check error handling
+ *     Better error messages for problems with connections etc
+ *     Debug mode for testing on phone/device, display more details
+ *     Dropdown list of favorite nodes to connect to
+ *     Dropdown list of active Allstar nodes on the network to connect to
+ *     Better looking status and connected node lists
+ *     Add audio, SIP or IAX?
+ *     Show maps of nodes via Google maps on phone
+ *     Update comments to javadoc format
+ *
+ */
 public class MainActivity extends AppCompatActivity
 {
     private static final int RESULT_SETTINGS = 1;
+    /* user settings */
     public static final String PREFS_NAME = "MyPrefsFile";
+    /** what gets displayed in the text area */
     public String results = "";
 
-    public AllstarSSHConnection node = new AllstarSSHConnection(); /* ssh connection */
+    /* ssh connection */
+    public AllstarSSHConnection node = new AllstarSSHConnection();
 
+    /* user credentials for login */
     public String passwd = "";
     public String user = "";
     public String host = "";
@@ -55,17 +63,22 @@ public class MainActivity extends AppCompatActivity
     public String remoteNode = "";
     public String myNode = "";
     public String cmd = "";
-
+    /** list of nodes file */
     public String allstardb = "/var/log/asterisk/astdb.txt";
 
+    /** Some default allstar command line commands */
     public String connectedNodesCmd = "sudo /usr/sbin/asterisk -rx \"rpt nodes $node\"";
     public String nodeStatusCmd = "sudo /usr/sbin/asterisk -rx \"rpt stats $node\"";
     public String my_ipCmd = "/usr/bin/curl -s icanhazip.com";
     public String nodeLstatusCmd = "sudo /usr/sbin/asterisk -rx \"rpt lstats $node\"";
     public String iaxRegistryCmd = "sudo /usr/sbin/asterisk -rx \"iax2 show registry\"";
     public String systemStatusCmd = "";
-    public  TextView textview; /* for displaying results like nodes connected  */
-    public boolean connectedNodesFlag = false; /* use for formating list of  list of nodes */
+
+    /* for displaying results like nodes connected  */
+    public  TextView textview;
+
+    /* use for formating list of  list of nodes */
+    public boolean connectedNodesFlag = false;
     public boolean nodeStatusFlag = false;
     public boolean connectFlag = false;
     public boolean disConnectFlag = false;
@@ -80,10 +93,9 @@ public class MainActivity extends AppCompatActivity
         TabLayout tabLayout = (TabLayout)findViewById(R.id.tabLayout);
 
         tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-        /*
+        /* for future, TODO must be a better way to create tabs on the fly vs hardwired
         tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
         tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
-
 */
 
         //addPreferencesFromResource(R.xml.settings);
@@ -104,7 +116,7 @@ public class MainActivity extends AppCompatActivity
         Button button5 = (Button) findViewById(R.id.button5);
         button5.setOnClickListener(myhandler1);
 
-        // display text at bottom
+        // display text at bottom lik status, list of nodes
         textview = (TextView) findViewById(R.id.textview1);
         textview.setMovementMethod(new ScrollingMovementMethod());
         textview.setText(".");
@@ -120,8 +132,9 @@ public class MainActivity extends AppCompatActivity
         public void onClick(View v) {
 
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-           // SharedPreferences prefs = getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE);
+            // SharedPreferences prefs = getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE);
 
+            /* User preferences or settings */
             if(prefs == null)
             {
                 // System.out.println("Error with settings, check your settings");
@@ -177,7 +190,7 @@ public class MainActivity extends AppCompatActivity
                 textview.setText("Error: check port number in settings. ");
             }
 
-            if(errorflag == false) {
+            if(!errorflag) {
                 // get text of node to connect to from user input via text
                 EditText remoteNodeED = (EditText) findViewById(R.id.editText);
 
@@ -380,7 +393,7 @@ public class MainActivity extends AppCompatActivity
         // editor.putBoolean("silentMode", mSilentMode);
 
         // Commit the edits!
-        editor.commit();
+        editor.commit(); // apply might be better
 
     }
 }

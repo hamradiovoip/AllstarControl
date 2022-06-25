@@ -21,20 +21,19 @@ public class AllstarSSHConnection {
         Channel channel; /* ssh channel */
         int port; /* ssh port */
 
-      /*
-        Constructor
-       */
+       /* Constructor */
         public AllstarSSHConnection()
         {
 
         }
 
 
-        /*
-           executeRemoteCommand() -  send command to remote Linux machine via ssh
+        /**
+         * Send command to remote Linux/node machine via ssh.
+         * return results
         */
         public static String executeRemoteCommand(String source, String username, String password, String hostname, int port, String cmd)
-                throws Exception {
+                {
              String results;
 
            // System.out.println(" Start SSH host= "+hostname+" user= "+username+" port= "+port+ "cmd:"+ cmd);
@@ -61,7 +60,7 @@ public class AllstarSSHConnection {
 
                myChannel.connect();
 
-               while(!myChannel.isClosed())
+               while(!myChannel.isClosed()) // might be a better way
                {
                    sleep(100);
                }
@@ -77,13 +76,13 @@ public class AllstarSSHConnection {
             return results;
         }
 
+        
         /**
          * Connect to the node
          *
          */
         public boolean connectToMyNode(String user, String passwd, String host, int port)
         {
-
             this.user = user;
             this.passwd= passwd;
             this.host= host;
@@ -95,9 +94,7 @@ public class AllstarSSHConnection {
             {
                 jsch=new JSch();
                // System.out.println("host= "+host+" user= "+user+" port= "+port+" tempHost= "+tempHost);
-
                 session=jsch.getSession(user, host, port);
-
                 session.connect();
             }
             catch(Exception e)
@@ -110,15 +107,12 @@ public class AllstarSSHConnection {
             return true;
         }/* connectToMyNode connect via SSH */
 
-
-
     /**
-     * another way
+     * another way to send command
      *
      */
         public boolean sendCmd(String command)
         {
-
             if(command !=null)
             {
                 try
@@ -154,9 +148,11 @@ public class AllstarSSHConnection {
                         {
                             sleep(1000);
                         }
-                        catch(Exception ee){System.out.println("Error with sending command to remote Allstar server\n");}
+                        catch(Exception ee)
+                        {
+                            System.out.println("Error with sending command to remote Allstar server\n");
+                        }
                     }
-
 
                     channel.disconnect();
                     //  session.disconnect();
@@ -171,10 +167,7 @@ public class AllstarSSHConnection {
 
             }
             return true;
-
         }
-
-
 
     }/* file AllstarSSHConnection */
 
