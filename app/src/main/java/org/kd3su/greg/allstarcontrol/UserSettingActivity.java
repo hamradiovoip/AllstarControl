@@ -13,7 +13,7 @@ public class UserSettingActivity extends PreferenceActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        // TODO fix deprecated method
         addPreferencesFromResource(R.xml.settings);
 
         // Display the fragment as the main content.

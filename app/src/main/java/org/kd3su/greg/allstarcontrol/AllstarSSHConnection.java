@@ -9,6 +9,7 @@ import static java.lang.Thread.sleep;
 
 /**
  * Created by greg on 6/1/2016.
+ * For connecting to allstar node via ssh
  */
 public class AllstarSSHConnection {
 
@@ -21,7 +22,7 @@ public class AllstarSSHConnection {
         int port; /* ssh port */
 
       /*
-
+        Constructor
        */
         public AllstarSSHConnection()
         {
@@ -77,7 +78,7 @@ public class AllstarSSHConnection {
         }
 
         /**
-         *
+         * Connect to the node
          *
          */
         public boolean connectToMyNode(String user, String passwd, String host, int port)
@@ -101,6 +102,7 @@ public class AllstarSSHConnection {
             }
             catch(Exception e)
             {
+                // TODO need better error handling
                 System.out.println(e);
                 return false;
             }
